@@ -1,8 +1,16 @@
+-- Conéctate a la base de datos 'postgres' antes de intentar eliminar 'gestion_usuarios'
+\c postgres;
+
+-- Elimina la base de datos si existe
 DROP DATABASE IF EXISTS gestion_usuarios;
+
+-- Crea la base de datos nuevamente
 CREATE DATABASE gestion_usuarios;
 
+-- Conéctate a la base de datos recién creada
 \c gestion_usuarios;
 
+-- Elimina las tablas si existen y crea nuevas
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,

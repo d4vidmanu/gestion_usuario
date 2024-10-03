@@ -7,11 +7,8 @@ WORKDIR /app
 # Instala las dependencias del sistema necesarias para compilar psycopg2
 RUN apt-get update && apt-get install -y libpq-dev gcc
 
-# Copia los archivos de la aplicación
-COPY ./app /app
-
-# Copia el archivo requirements.txt
-COPY requirements.txt requirements.txt
+# Copia todos los archivos del proyecto al directorio de trabajo
+COPY . .
 
 # Instala las dependencias de Python
 RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
