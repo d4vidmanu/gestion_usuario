@@ -4,11 +4,16 @@ FROM python:3.9-slim
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
+# Instala las dependencias del sistema necesarias para compilar psycopg2
+RUN apt-get update && apt-get install -y libpq-dev gcc
+
 # Copia los archivos de la aplicación
 COPY ./app /app
 
-# Instala las dependencias
+# Copia el archivo requirements.txt
 COPY requirements.txt requirements.txt
+
+# Instala las dependencias de Python
 RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Exponer el puerto en el que corre FastAPI
