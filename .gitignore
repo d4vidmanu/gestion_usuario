@@ -1,0 +1,61 @@
+# Entorno virtual (Python virtual environments)
+venv/
+.env
+
+# Archivos de compilación de Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Archivos de bases de datos
+*.sqlite3
+*.db
+*.db-journal
+
+# Logs
+logs/
+*.log
+
+# Coverage files (si usas herramientas de cobertura de pruebas como pytest-cov)
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+
+# Archivos de testing
+pytest_cache/
+.tox/
+.cache/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración de IDEs
+.vscode/
+.idea/
+
+# Archivos temporales
+tmp/
+temp/
+
+# Archivos de construcción (si usas algún compilador o generador de assets)
+dist/
+build/
+
+# Docker files
+docker-compose.override.yml
+docker-compose.local.yml
+
+# Alembic (herramienta de migraciones para SQLAlchemy)
+migrations/
+
+# Otros archivos sensibles
+secrets.yaml
+
+# Ignorar lockfiles o archivos de dependencias (opcional)
+Pipfile.lock
+poetry.lock

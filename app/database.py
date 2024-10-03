@@ -1,14 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from .config import DATABASE_URL  # Importar DATABASE_URL desde config.py
 
-# Configura la URL de tu base de datos PostgreSQL local
-DATABASE_URL = "postgresql://postgres:Manuel_1223@localhost/gestion_usuarios"
-
-# Crea el motor de conexión
+# Crear el motor de conexión usando la URL de la base de datos
 engine = create_engine(DATABASE_URL)
 
-# Crea una sesión
+# Crear una sesión
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Base para los modelos
