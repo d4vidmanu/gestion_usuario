@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y libpq-dev gcc
 COPY . .
 
 # Instala las dependencias de Python
-RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir --timeout=120 -r requirements.txt
+
 
 # Exponer el puerto en el que corre FastAPI
 EXPOSE 8000

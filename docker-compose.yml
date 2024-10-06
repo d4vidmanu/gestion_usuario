@@ -19,14 +19,12 @@ services:
     build: .
     container_name: fastapi_app
     environment:
-      DB_HOST: db
+      DB_HOST: 34.195.53.21  # IP externa de la base de datos
       DB_USER: postgres
       DB_PASSWORD: utec
       DB_NAME: gestion_usuarios
     ports:
-      - "3001:8000"
-    depends_on:
-      - db
+      - "3001:8000"  # Exponer el puerto 8000 dentro del contenedor como 3001 externamente
     networks:
       - app-network
 
