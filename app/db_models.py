@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Date
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Enum
 from sqlalchemy.orm import relationship
 from .database import Base
 from datetime import date, timedelta
@@ -14,9 +14,6 @@ class User(Base):
 
     subscription = relationship("Subscription", uselist=False, back_populates="user")
     reviews = relationship("Review", back_populates="user")
-
-
-
 
 
 class Subscription(Base):
@@ -39,14 +36,16 @@ class Subscription(Base):
             self.end_date = self.start_date + timedelta(days=90)
 
 
-
 class Review(Base):
     __tablename__ = "reviews"
 
     id = Column(Integer, primary_key=True, index=True)
     rating = Column(Integer)
-    created_at = Column(Date)
-    ride_id = Column(Integer)  # Relacionado con la entidad de Ride (si la añades más adelante)
+    created_at = Column(Date, default=date.today)
+    ride_id = Column(Integer)
     user_id = Column(Integer, ForeignKey('users.id'))
+
+    # Aquí simplificamos el enum
+    description = Column(Enum('Excelente', 'Bien', 'Problemas', name="review_description_enum"), nullable=False)
 
     user = relationship("User", back_populates="reviews")

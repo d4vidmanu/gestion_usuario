@@ -14,7 +14,8 @@ def get_user(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()
 
 def create_subscription(db: Session, subscription: schemas.SubscriptionCreate, user_id: int):
-    db_subscription = models.Subscription(**subscription.dict(), user_id=user_id)
+    # Cambiado de `dict()` a `model_dump()`
+    db_subscription = models.Subscription(**subscription.model_dump(), user_id=user_id)
     db_subscription.set_end_date()  # Establece la fecha de fin automáticamente según el tipo
     db.add(db_subscription)
     db.commit()
@@ -37,13 +38,19 @@ def get_user_subscription(db: Session, user_id: int):
 
 
 def create_review(db: Session, review: schemas.ReviewCreate, user_id: int):
-    db_review = models.Review(**review.dict(), user_id=user_id)
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+    if not db_user:
+        raise ValueError("User not found")
+
+    db_review = models.Review(**review.model_dump(), user_id=user_id)
     db.add(db_review)
     db.commit()
     db.refresh(db_review)
     return db_review
 
+
 def get_review(db: Session, review_id: int):
     return db.query(models.Review).filter(models.Review.id == review_id).first()
 
-
+def get_user_by_email_and_password(db: Session, email: str, password: str):
+    return db.query(models.User).filter(models.User.email == email, models.User.password == password).first()
