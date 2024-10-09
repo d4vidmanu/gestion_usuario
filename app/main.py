@@ -4,6 +4,8 @@ from . import crud, schemas
 from . import db_models as models
 from .database import engine, get_db
 from typing import List
+from .schemas import UserLogin
+
 
 
 models.Base.metadata.create_all(bind=engine)
@@ -101,8 +103,8 @@ def delete_review(review_id: int, db: Session = Depends(get_db)):
 
 
 
-@app.post("/register/", response_model=schemas.UserIDResponse)
-def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+@app.post("/login/", response_model=schemas.UserIDResponse)
+def register_user(user: schemas.UserLogin, db: Session = Depends(get_db)):
     # Verificar si el usuario ya existe
     db_user = crud.get_user_by_email_and_password(db, email=user.email, password=user.password)
 

@@ -58,3 +58,8 @@ class UserIDResponse(BaseModel):
 
     class Config:
         from_attributes = True  # Para la compatibilidad con SQLAlchemy
+
+# Esquema para el login
+class UserLogin(BaseModel):
+    email: str
+    password: str
